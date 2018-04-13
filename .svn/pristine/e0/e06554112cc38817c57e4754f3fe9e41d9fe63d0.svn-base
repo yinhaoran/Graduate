@@ -1,0 +1,41 @@
+package com.sys.person.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sys.entity.Comment;
+import com.sys.entity.User;
+import com.sys.person.service.impl.PersonCommentImpl;
+import com.sys.person.service.inter.PersonCommentInt;
+
+public class PersonCommentServlet extends HttpServlet {
+
+	
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset:utf-8");
+		String action = request.getParameter("action");
+		if("loadCommentByperson".equals(action)){
+			loadCommentByperson(request, response);
+		}
+	}
+	public void loadCommentByperson(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int userid = user.getUserid();
+		PersonCommentInt commentservice = new PersonCommentImpl();
+		List<Comment> commentlist = commentservice.findCommentListByUser(userid);
+		request.setAttribute("commentlist", commentlist);
+		request.getRequestDispatcher("/person/comment.jsp").forward(request, response);
+	}
+}

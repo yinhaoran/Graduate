@@ -1,0 +1,13 @@
+<div class="span2 main-menu-span">
+				<div class="well nav-collapse sidebar-nav">
+					<ul class="nav nav-tabs nav-stacked main-menu">
+						<li class="nav-header hidden-tablet">功能选择</li>
+						<li><a class="ajax-link" href="/TeamProject/ManageComServlet?action=Loadcom"><i class="icon-home"></i><span class="hidden-tablet">商品管理</span></a></li>
+						<li><a class="ajax-link" href="/TeamProject/ManageUserServlet?action=list"><i class="icon-eye-open"></i><span class="hidden-tablet">用户管理</span></a></li>
+						<li><a class="ajax-link" href="/TeamProject/ManageOrderServlet?action=findAllOrder"><i class="icon-edit"></i><span class="hidden-tablet">订单管理</span></a></li>
+						<li><a class="ajax-link" href="/TeamProject/ManageCategoreServlet?action=LoadCategore"><i class="icon-list-alt"></i><span class="hidden-tablet">分类管理</span></a></li>
+						<li><a class="ajax-link" href="/TeamProject/ManageCommentServlet?action=list"><i class="icon-list-alt"></i><span class="hidden-tablet">留言管理</span></a></li>
+					</ul>
+					
+				</div>
+		</div>

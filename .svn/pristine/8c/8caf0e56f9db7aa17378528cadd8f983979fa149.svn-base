@@ -1,0 +1,9 @@
+package com.sys.index.service.Interface;
+
+import java.util.List;
+
+import com.sys.entity.ShopCart;
+
+public interface ShopcartServiceInt {
+	public List<ShopCart> getShopCartByUserId(Integer userid);
+}

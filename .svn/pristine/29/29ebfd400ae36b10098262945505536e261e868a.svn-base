@@ -1,0 +1,11 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.entity.Sort;
+
+public interface SortService {
+	public List<Sort> findAllSort(Sort sort);
+	public int addSorts(Sort sort);
+	public int deleteSorts(int sortid);
+}

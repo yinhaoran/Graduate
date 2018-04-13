@@ -1,0 +1,215 @@
+package com.sys.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sys.dao.BaseDao;
+import com.sys.dao.OrderDao;
+import com.sys.entity.Order;
+
+public class OrderImpl extends BaseDao implements OrderDao{
+
+	public int addOrder(Order order) {
+		String sql = "insert into tb_order values(?,to_date(?,'yyyy-mm-dd'),?,1,?,0,?)";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, order.getOrderid());
+			pst.setString(2, order.getTranstime());
+			pst.setInt(3, order.getUserid());
+			pst.setString(4, order.getUserwords());
+			pst.setInt(5, order.getAddressid());
+			row = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int updateOrder(Order order) {
+String sql = "update tb_order set orderstatus=?,transtime=to_date(?,'yyyy-mm-dd'),userid=?,userwords=?,addressid =? where orderid=?";
+		
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, order.getOrderstatus());
+			pst.setString(2, order.getTranstime());
+			pst.setInt(3, order.getUserid());
+			pst.setString(4, order.getUserwords());
+			pst.setInt(5, order.getAddressid());
+			pst.setInt(6, order.getOrderid());
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int deleteOrder(int orderid) {
+		String sql="delete from tb_order where orderid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1,orderid);
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public List<Order> findAllOrder(Order order) {
+		String sql="select * from tb_order where 1=1 ";
+
+		if(order.getUserid()!=null){
+			sql+=" and userid='"+order.getUserid()+"'";
+		}
+		if(order.getOrderid()!=null){
+			sql+=" and orderid='"+order.getOrderid()+"'";
+		}
+		if(order.getOrderstatus()!=null){
+			sql+=" and orderstatus='"+order.getOrderstatus()+"'";
+		}
+		if(order.getUserwords()!=null){
+			sql+=" and userwords='"+order.getUserwords()+"'";
+		}
+		if(order.getTranstime()!=null){
+			sql+=" and transtime='"+order.getTranstime()+"'";
+		}
+		if(order.getAddressid()!=null){
+			sql+=" and addressid='"+order.getAddressid()+"'";
+		}
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		List<Order> list =new ArrayList<Order>();
+		try {
+			pst=con.prepareStatement(sql);
+			rs=pst.executeQuery();
+			while(rs.next()){
+				Order o=new Order();
+				o.setOrderid(rs.getInt("orderid"));
+				o.setOrderstatus(rs.getInt("orderstatus"));
+				o.setUserid(rs.getInt("userid"));
+				o.setTranstime(rs.getString("transtime"));
+				o.setUserwords(rs.getString("userwords"));
+				o.setOrdercount(rs.getInt("ordercount"));
+				o.setAddressid(rs.getInt("addressid"));
+				list.add(o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		
+		
+		return list;
+	}
+	
+	public Order getOrderById(int orderid) {
+		String sql="select * from tb_order where orderid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		Order o=null;
+		try {
+
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, orderid);
+			rs=pst.executeQuery();
+			
+			while(rs.next()){
+				o=new Order();
+				o.setOrderid(rs.getInt("orderid"));
+				o.setOrderstatus(rs.getInt("orderstatus"));
+				o.setUserid(rs.getInt("userid"));
+				o.setTranstime(rs.getString("transtime"));
+				o.setUserwords(rs.getString("userwords"));
+				o.setOrdercount(rs.getInt("ordercount"));
+				o.setAddressid(rs.getInt("addressid"));
+			}
+			
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		return o;
+	}
+	public List<Order> findAllOrder() {
+		String sql="select * from tb_order ";
+
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		List<Order> list =new ArrayList<Order>();
+		try {
+			pst=con.prepareStatement(sql);
+			rs=pst.executeQuery();
+			while(rs.next()){
+				Order o=new Order();
+				o.setOrderid(rs.getInt("orderid"));
+				o.setOrderstatus(rs.getInt("orderstatus"));
+				o.setUserid(rs.getInt("userid"));
+				o.setTranstime(rs.getString("transtime"));
+				o.setUserwords(rs.getString("userwords"));
+				o.setOrdercount(rs.getInt("ordercount"));
+				o.setAddressid(rs.getInt("addressid"));
+				list.add(o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		
+		
+		return list;
+	}
+
+	public int insertOrder(Order order) {
+		String sql = "insert into tb_order values(?,to_date(?,'yyyy-mm-dd'),?,1,?,0,?)";
+		Connection con = super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, order.getOrderid());
+			pst.setString(2, order.getTranstime());
+			pst.setInt(3, order.getUserid());
+			pst.setString(4, order.getUserwords());
+			pst.setInt(5, order.getAddressid());
+			row = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		int orderid = order.getOrderid();
+		return orderid;
+	}
+}

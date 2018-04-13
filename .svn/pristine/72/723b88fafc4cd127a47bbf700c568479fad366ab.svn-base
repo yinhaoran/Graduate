@@ -1,0 +1,46 @@
+package com.sys.entity;
+
+public class OrderDetail {
+		private Integer detailid;
+		private Integer orderid;
+		private Integer comid;
+		private Integer comcount;
+		public Integer getDetailid() {
+			return detailid;
+		}
+		public void setDetailid(Integer detailid) {
+			this.detailid = detailid;
+		}
+		public Integer getOrderid() {
+			return orderid;
+		}
+		public void setOrderid(Integer orderid) {
+			this.orderid = orderid;
+		}
+		public Integer getComid() {
+			return comid;
+		}
+		public void setComid(Integer comid) {
+			this.comid = comid;
+		}
+		public Integer getComcount() {
+			return comcount;
+		}
+		public void setComcount(Integer comcount) {
+			this.comcount = comcount;
+		}
+		public OrderDetail(Integer detailid, Integer orderid, Integer comid,
+				Integer comcount) {
+			super();
+			this.detailid = detailid;
+			this.orderid = orderid;
+			this.comid = comid;
+			this.comcount = comcount;
+		}
+		public OrderDetail() {
+			super();
+		}
+		
+		
+		
+}

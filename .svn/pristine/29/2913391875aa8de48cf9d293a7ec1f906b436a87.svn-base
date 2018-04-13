@@ -1,0 +1,79 @@
+package com.sys.entity;
+
+public class Commodity {
+	private Integer comid;   //商品id
+	private String comname;//商品名字
+	private Integer price;//商品价格
+	private Integer inventory;//商品库存
+	private String picture;//商品图片
+	private String describe;//商品描述
+	private Integer sortid;// 商品分类
+	public Integer getComid() {
+		return comid;
+	}
+	public void setComid(Integer comid) {
+		this.comid = comid;
+	}
+	public String getComname() {
+		return comname;
+	}
+	public void setComname(String comname) {
+		this.comname = comname;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	public Integer getInventory() {
+		return inventory;
+	}
+	public void setInventory(Integer inventory) {
+		this.inventory = inventory;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public String getDescribe() {
+		return describe;
+	}
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+	public Integer getSortid() {
+		return sortid;
+	}
+	public void setSortid(Integer sortid) {
+		this.sortid = sortid;
+	}
+	public Commodity(Integer comid, String comname, Integer price,
+			Integer inventory, String picture, String describe, Integer sortid) {
+		super();
+		this.comid = comid;
+		this.comname = comname;
+		this.price = price;
+		this.inventory = inventory;
+		this.picture = picture;
+		this.describe = describe;
+		this.sortid = sortid;
+	}
+	public Commodity() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Commodity [comid=" + comid + ", comname=" + comname + ", price=" + price + ", inventory=" + inventory
+				+ ", picture=" + picture + ", describe=" + describe + ", sortid=" + sortid + "]";
+	}
+	
+	
+
+	
+	
+	
+	
+}

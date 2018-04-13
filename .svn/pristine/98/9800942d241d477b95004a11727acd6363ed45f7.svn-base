@@ -1,0 +1,24 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.Comment;
+import com.sys.entity.Commodity;
+
+public interface CommentDao {
+	public int addComment(Comment comment);
+	public int updateComment(Comment comment);
+	public int deleteComment(int commentid);
+	
+	/**
+	 * 根据
+	 * @return
+	 */
+	public List<Comment> findAllComment(Comment comment);
+	/**
+	 * 根据ID查找商品
+	 */
+	public Comment getCommentById(int commentid);
+	
+	public List<Comment> findCommentById(int comid);
+}

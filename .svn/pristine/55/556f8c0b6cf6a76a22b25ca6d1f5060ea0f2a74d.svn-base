@@ -1,0 +1,47 @@
+package com.sys.index.service;
+
+import java.util.List;
+
+import com.sys.dao.ShopCartDao;
+import com.sys.entity.ShopCart;
+import com.sys.impl.ShopCartImpl;
+import com.sys.index.service.Interface.ShopcartServiceInt;
+
+public class ShopcartServiceImpl implements ShopcartServiceInt {
+	ShopCart shopcart = new ShopCart();
+	ShopCartDao shopcartdao = new ShopCartImpl();
+	/*
+	 * (non-Javadoc)
+	 * @see com.sys.index.service.Interface.ShopcartServiceInt#getShopCartByUserId(java.lang.Integer)
+	 */
+	public List<ShopCart> getShopCartByUserId(Integer userid) {
+		
+		shopcart.setUserid(userid);
+		List<ShopCart> list = shopcartdao.findAllShopCart(shopcart);
+		return list;
+	}
+	public int deleShopcartByuserid(int userid) {
+		int row = shopcartdao.deleteShopCartByUserid(userid);
+		return row;
+	}
+	public int addShopcart(ShopCart shopcart) {
+		int row = shopcartdao.addShopCart(shopcart);
+		return row;
+	}
+	public int deleShopcartByshopcartid(int shopcartid) {
+		int row = shopcartdao.deleteShopCart(shopcartid);
+		return row;
+	}
+	public int updateShopcart(ShopCart shopcart) {
+		int row = shopcartdao.updateShopCart(shopcart);
+		return 0;
+	}
+	public ShopCart isExistCommodity(int userid,int comid) {
+		
+		shopcart.setComid(comid);
+		shopcart.setUserid(userid);
+		List<ShopCart> list = shopcartdao.findAllShopCart(shopcart);
+		ShopCart shopcart1 = list.get(0);
+		return shopcart1;
+	}
+}

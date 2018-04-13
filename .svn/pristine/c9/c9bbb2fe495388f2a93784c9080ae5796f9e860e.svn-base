@@ -1,0 +1,28 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.Commodity;
+
+public interface CommodityDao {
+	public int addCommodity(Commodity commodity);
+	public int updateCommodity(Commodity commodity);
+	public int deleteCommodity(int comid);
+	
+	/** 
+	 * 查找所有
+	 * @return
+	 */
+	public List<Commodity> findAllCommodity(Commodity commodity);
+	/**
+	 * 根据ID查找商品
+	 */
+	public Commodity getCommodityById(int comid);
+	
+	
+	/**
+	 * 商品提示功能
+	 */
+	public List<Commodity> CommoditySuggest(String comname);
+	
+}

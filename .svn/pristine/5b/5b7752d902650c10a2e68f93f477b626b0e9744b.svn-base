@@ -1,0 +1,24 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.Comment;
+import com.sys.entity.Order;
+
+public interface OrderDao {
+
+	public int addOrder(Order order);
+	public int updateOrder(Order order);
+	public int deleteOrder(int orderid);
+	
+	/**
+	 * 条件查询
+	 * @return
+	 */
+	public List<Order> findAllOrder(Order order);
+	public List<Order> findAllOrder();
+	/**
+	 * 根据ID查找商品
+	 */
+	public Order getOrderById(int orderid);
+}

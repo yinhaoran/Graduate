@@ -1,0 +1,163 @@
+package com.sys.servlet;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import com.sys.entity.Commodity;
+import com.sys.entity.Sort;
+import com.sys.service.CommodityService;
+import com.sys.service.CommodityServiceImp;
+import com.sys.service.SortService;
+import com.sys.service.SortServiceImpl;
+
+public class ManageComServlet extends HttpServlet {
+	CommodityService service = new CommodityServiceImp();
+	SortService sortservice = new SortServiceImpl();
+	/**
+	 * Commodity Manage
+	 */
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String action = request.getParameter("action");
+		if("addCom".equals(action)){
+			AddCom(request, response);
+		}else if("Updatecom".equals(action)){
+			UpdateCom(request, response);
+		}else if("Deletecom".equals(action)){
+			DeleteCom(request, response);
+		}else if("Loadcom".equals(action)){
+			LoadCom(request, response);
+		}else if("doUpdate".equals(action)){
+			doUpdateCom(request, response);
+		}
+	}
+	//add commodity
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void AddCom(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		Integer sortid = Integer.parseInt(request.getParameter("sorts"));
+		String picture = "picture";
+		String comname = request.getParameter("comname");
+		Integer price = Integer.parseInt(request.getParameter("price"));
+		Integer inventory = Integer.parseInt(request.getParameter("inventory"));
+		String describe = request.getParameter("describe");
+		Integer comid = 1;
+		Commodity commodity = new Commodity(comid, comname, price, inventory, picture, describe, sortid);
+		System.out.println(commodity.toString());
+		int result = service.AddCommodity(commodity);
+		if(result > 0){
+			out.print("<script type='text/javascript'>");
+			out.print("alert('添加商品成功');location='"+request.getContextPath()+"/Manage/AddCom.jsp'");
+			out.print("</script>");
+		}else{
+			out.print("<script type='text/javascript'>");
+			out.print("alert('添加商品失败');location='"+request.getContextPath()+"/Manage/AddCom.jsp'");
+			out.print("</script>");
+		}
+	}
+	//delete commodity
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void DeleteCom(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		Integer comid = Integer.parseInt(request.getParameter("comid"));
+		int result = service.deleteCommodity(comid);
+		if(result > 0){
+			out.print("<script type='text/javascript'>");
+			out.print("alert('success');location='"+request.getContextPath()+"/ManageComServlet?action=Loadcom'");
+			out.print("</script>");
+		}else{
+			out.print("<script type='text/javascript'>");
+			out.print("alert('failed');location='"+request.getContextPath()+"/ManageComServlet?action=Loadcom'");
+			out.print("</script>");
+		}
+	}
+	//update commodity
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void UpdateCom(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int comid = Integer.parseInt(request.getParameter("comid"));
+		Commodity comm = service.findCommodityById(comid);
+		Sort sort = new Sort();
+		List<Sort> list = sortservice.findAllSort(sort);
+		request.setAttribute("sortlist", list);
+		request.setAttribute("commodity", comm);
+		request.getRequestDispatcher("/Manage/Commodity_modify.jsp").forward(request, response);
+	}
+	public void doUpdateCom(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		Commodity commodity = this.requestDataObj(request);
+		int result = service.updateCommodity(commodity);
+		if(result > 0){
+			out.print("<script type='text/javascript'>");
+			out.print("alert('success');location='"+request.getContextPath()+"/ManageComServlet?action=Loadcom'");
+			out.print("</script>");
+		}else{
+			out.print("<script type='text/javascript'>");
+			out.print("alert('failed');location='"+request.getContextPath()+"/ManageComServlet?action=Loadcom'");
+			out.print("</script>");
+		}
+	}
+	private Commodity requestDataObj(HttpServletRequest request){
+		Commodity commodity = null;
+		Integer comid = Integer.parseInt(request.getParameter("comid"));
+		Integer sortid = Integer.parseInt(request.getParameter("sorts"));
+		String comname = request.getParameter("comname");
+		Integer price = Integer.parseInt(request.getParameter("price"));
+		Integer inventory = Integer.parseInt(request.getParameter("inventory"));
+		String describe = request.getParameter("describe");
+		String picture = "stupid";
+		commodity = new Commodity(comid, comname, price, inventory, picture, describe, sortid);
+		return commodity;
+	}
+	//load commodity
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void LoadCom(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Commodity> list = service.showCommdity();
+		request.setAttribute("CommodityList", list);
+		request.getRequestDispatcher("/Manage/ManageCom.jsp").forward(request, response);
+	}
+}

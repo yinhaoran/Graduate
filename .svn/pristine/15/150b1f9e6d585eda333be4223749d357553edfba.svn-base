@@ -1,0 +1,179 @@
+package com.sys.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sys.dao.BaseDao;
+import com.sys.dao.CommentDao;
+import com.sys.entity.Comment;
+import com.sys.entity.Commodity;
+
+public class CommentImpl extends BaseDao implements CommentDao {
+
+	public int addComment(Comment comment) {
+		String sql="insert into tb_comment values(comment_seq.nextval,?,?,to_date(?,'yyyy-mm-dd hh:mi:ss'),?)";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+		
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setString(1, comment.getContent());
+			pst.setString(2, comment.getUsername());
+			pst.setString(3, comment.getCreatedate());
+			pst.setInt(4, comment.getComid());
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con,pst,null);
+		}
+		return row;
+	}
+
+
+	public int updateComment(Comment comment) {
+		String sql = "update tb_comment set content=?,createdate=to_date(?,'yyyy-mm-dd  hh:mi:ss'),comid=? where commentid=?";
+		
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setString(1, comment.getContent());
+			pst.setString(2, comment.getUsername());
+			pst.setString(3, comment.getCreatedate());
+			pst.setInt(4, comment.getComid());
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int deleteComment(int commentid) {
+		String sql="delete from tb_comment where commentid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1,commentid);
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public List<Comment> findAllComment(Comment comment) {
+		String sql="select * from tb_comment t,tb_commodity c where t.comid=c.comid ";
+
+		if(comment.getCommentid()!=null){
+			sql+="and commentid='"+comment.getCommentid()+"'";
+		}
+		if(comment.getContent()!=null){
+			sql+="and content='"+comment.getContent()+"'";
+		}
+		if(comment.getUsername()!=null){
+			sql+="and username='"+comment.getUsername()+"'";
+		}
+		if(comment.getCreatedate()!=null){
+			sql+="and createdate='"+comment.getCreatedate()+"'";
+		}
+		if(comment.getComid()!=null){
+			sql+="and comid='"+comment.getComid()+"'";
+		}
+		if(comment.getUserid() != null){
+			sql += "and comid='"+comment.getUserid()+"'";
+		}
+		
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		List<Comment> list =new ArrayList<Comment>();
+		try {
+			System.out.println(sql);
+			pst=con.prepareStatement(sql);
+			rs=pst.executeQuery();
+			while(rs.next()){
+				Comment comm=new Comment();
+				comm.setContent(rs.getString("content"));
+				comm.setCommentid(rs.getInt("commentid"));
+				comm.setCreatedate(rs.getString("createdate"));
+				comm.setComid(rs.getInt("comid"));
+				comm.setUsername(rs.getString("username"));
+				comm.setUserid(rs.getInt("userid"));
+				
+				Commodity commodity = new Commodity();
+				commodity.setComid(rs.getInt("comid"));
+				commodity.setComname(rs.getString("comname"));
+				commodity.setDescribe(rs.getString("describe"));
+				commodity.setInventory(rs.getInt("inventory"));
+				commodity.setPicture(rs.getString("picture"));
+				commodity.setPrice(rs.getInt("price"));
+				commodity.setSortid(rs.getInt("sortid"));
+				comm.setCommodity(commodity);
+				list.add(comm);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+
+		return list;
+	}
+
+	public Comment getCommentById(int commentid) {
+		String sql="select * from tb_comment where commentid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		Comment comm=null;
+		try {
+
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, commentid);
+			rs=pst.executeQuery();
+			
+			while(rs.next()){
+				comm=new Comment();
+				comm.setContent(rs.getString("content"));
+				comm.setCommentid(rs.getInt("commentid"));
+				comm.setCreatedate(rs.getString("createdate"));
+				comm.setComid(rs.getInt("comid"));
+				comm.setUsername(rs.getString("username"));
+			
+			}
+			
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		return  comm;
+	}
+
+
+	public List<Comment> findCommentById(int comid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

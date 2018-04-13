@@ -1,0 +1,170 @@
+package com.sys.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sys.dao.BaseDao;
+import com.sys.dao.OrderDetailDao;
+import com.sys.entity.OrderDetail;
+
+public class OrderDetailImpl extends BaseDao implements OrderDetailDao{
+
+	public int addOrderDetail(OrderDetail orderdetail) {
+		String sql = "insert into tb_orderdetail values(orderdetail_seq.nextval,?,?,?)";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+		
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1,orderdetail.getOrderid());
+			pst.setInt(2, orderdetail.getComid());
+			pst.setInt(2, orderdetail.getComcount());
+			row = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int updateOrderDetail(OrderDetail orderdetail) {
+String sql = "update tb_orderdetail set orderid=?,comid=?,comcount=? where detailid=?";
+		
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1,orderdetail.getOrderid());
+			pst.setInt(2, orderdetail.getComid());
+			pst.setInt(2, orderdetail.getComcount());
+			pst.setInt(4, orderdetail.getDetailid());
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int deleteOrderDetail(int detailid) {
+		String sql="delete from tb_orderdetail where orderid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1,detailid);
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public List<OrderDetail> findAllOrderDetail(OrderDetail orderdetail) {
+		String sql="select * from tb_orderdetail where 1=1";
+
+		if(orderdetail.getComid()!=null){
+			sql+="and comid='"+orderdetail.getComid()+"'";
+		}
+		if(orderdetail.getComcount()!=null){
+			sql+="and comcount='"+orderdetail.getComcount()+"'";
+		}
+		if(orderdetail.getDetailid()!=null){
+			sql+="and detailid='"+orderdetail.getDetailid()+"'";
+		}
+		if(orderdetail.getOrderid()!=null){
+			sql+="and orderid='"+orderdetail.getOrderid()+"'";
+		}
+		
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		List<OrderDetail> list =new ArrayList<OrderDetail>();
+		try {
+			pst=con.prepareStatement(sql);
+			rs=pst.executeQuery();
+			while(rs.next()){
+				OrderDetail od=new OrderDetail();
+				od.setComcount(rs.getInt("detailid"));
+				od.setComcount(rs.getInt("orderid"));
+				od.setComcount(rs.getInt("comid"));
+				od.setComcount(rs.getInt("comcount"));
+				
+				list.add(od);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		
+		
+		return list;
+	}
+
+	public OrderDetail getOrderDetailById(int detailid) {
+		String sql="select * from tb_orderdetail where detailid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		OrderDetail od=null;
+		try {
+
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, detailid);
+			rs=pst.executeQuery();
+			
+			while(rs.next()){
+				od=new OrderDetail();
+				od.setComcount(rs.getInt("detailid"));
+				od.setComcount(rs.getInt("orderid"));
+				od.setComcount(rs.getInt("comid"));
+				od.setComcount(rs.getInt("comcount"));
+				
+			
+			}
+			
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		return od;
+	}
+
+	public void insertOrderDetail(OrderDetail orderdetail) {
+		String sql = "insert into tb_orderdetail values(orderdetail_seq.nextval,?,?,?)";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1,orderdetail.getOrderid());
+			pst.setInt(2, orderdetail.getComid());
+			pst.setInt(3, orderdetail.getComcount());
+			int i = pst.executeUpdate();
+			System.out.println(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+	}
+	
+}

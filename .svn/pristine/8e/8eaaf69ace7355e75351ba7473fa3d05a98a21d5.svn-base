@@ -1,0 +1,99 @@
+package com.sys.entity;
+/**
+ * 订单管理
+ * @author hp
+ *
+ */
+public class OrderMange {
+		private  Integer orderid;		//订单编号
+		private String transtime;     //生成时间
+		private Integer userid;       //用户id
+		private Integer orderstatus;  //订单状态
+		private Integer comid;    //商品ID
+		private Integer comcount; //商品数量
+		private String comname;	 //商品名字
+		private Integer price;   //商品价格
+		private String picture; //商品图片
+		
+		
+		public Integer getOrderid() {
+			return orderid;
+		}
+		public void setOrderid(Integer orderid) {
+			this.orderid = orderid;
+		}
+		public String getTranstime() {
+			return transtime;
+		}
+		public void setTranstime(String transtime) {
+			this.transtime = transtime;
+		}
+		public Integer getUserid() {
+			return userid;
+		}
+		public void setUserid(Integer userid) {
+			this.userid = userid;
+		}
+		public Integer getOrderstatus() {
+			return orderstatus;
+		}
+		public void setOrderstatus(Integer orderstatus) {
+			this.orderstatus = orderstatus;
+		}
+		public Integer getComid() {
+			return comid;
+		}
+		public void setComid(Integer comid) {
+			this.comid = comid;
+		}
+		public Integer getComcount() {
+			return comcount;
+		}
+		public void setComcount(Integer comcount) {
+			this.comcount = comcount;
+		}
+		public String getComname() {
+			return comname;
+		}
+		public void setComname(String comname) {
+			this.comname = comname;
+		}
+		public Integer getPrice() {
+			return price;
+		}
+		public void setPrice(Integer price) {
+			this.price = price;
+		}
+		
+		
+		
+		public String getPicture() {
+			return picture;
+		}
+		public void setPicture(String picture) {
+			this.picture = picture;
+		}
+		public OrderMange(Integer orderid, String transtime, Integer userid,
+				Integer orderstatus, Integer comid, Integer comcount,
+				String comname, Integer price) {
+			super();
+			this.orderid = orderid;
+			this.transtime = transtime;
+			this.userid = userid;
+			this.orderstatus = orderstatus;
+			this.comid = comid;
+			this.comcount = comcount;
+			this.comname = comname;
+			this.price = price;
+		}
+		public OrderMange() {
+			super();
+		}
+		
+		
+		
+		
+}
+/*select o.orderid,o.transtime,o.userid,o.orderstatus,od.detailid,od.comid,od.comcount,c.comname,c.price from tb_order o,tb_orderdetail od,tb_commodity c
+where o.orderid=od.orderid 
+and od.comid=c.comid*/

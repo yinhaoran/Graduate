@@ -1,0 +1,26 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.ShopCart;
+
+public interface ShopCartDao {
+	public int addShopCart(ShopCart shopcart);
+	public int updateShopCart(ShopCart shopcart);
+	public int deleteShopCart(int shopcartid);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<ShopCart> findAllShopCart(ShopCart shopcart);
+	/**
+	 * ���ID����
+	 */
+	public ShopCart getShopCartById(int shopcartid);
+	
+	public int deleteShopCartByUserid(int userid);
+	
+	public int shopCartCount(int userid);
+	
+}

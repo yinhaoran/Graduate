@@ -1,0 +1,23 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.dao.SortDao;
+import com.sys.entity.Sort;
+import com.sys.impl.SortImpl;
+
+public class SortServiceImpl implements SortService {
+	SortDao sortdao = new SortImpl();
+	public List<Sort> findAllSort(Sort sort) {
+		List<Sort> list = sortdao.findAllSort(sort);
+		return list;
+	}
+	public int addSorts(Sort sort) {
+		int row = sortdao.addSort(sort);
+		return row;
+	}
+	public int deleteSorts(int sortid) {
+		int row = sortdao.deleteSort(sortid);
+		return row;
+	}
+}

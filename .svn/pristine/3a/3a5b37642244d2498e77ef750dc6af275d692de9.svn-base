@@ -1,0 +1,22 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.ShipAddress;
+import com.sys.entity.User;
+
+public interface ShipAddressDao {
+	public int addShipAddress(ShipAddress shipAddress);
+	public int updateShipAddress(ShipAddress shipAddress);
+	public int deleteShipAddress(int addressid);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<ShipAddress> findAllShipAddress(ShipAddress shipAddress);
+	/**
+	 * ���ID����
+	 */
+	public ShipAddress getShipAddressById(int addressid);
+}

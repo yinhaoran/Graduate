@@ -1,0 +1,56 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.dao.UserDao;
+import com.sys.entity.User;
+import com.sys.impl.UserImpl;
+
+public class ManageLogin {
+
+	/**
+	 * 管理员登�?
+	 * 
+	 * @param username
+	 *            用户�?
+	 * @param password
+	 *            密码
+	 * @return
+	 */
+	public User manageLogin(String username, String password) {
+
+		UserDao ud = new UserImpl();
+		if (".com".endsWith(username)) {
+			User u = new User(username, password);
+			List<User> list = ud.findAllUser(u);
+			if (list.size() == 0) {
+				return null;
+			}
+			return list.get(0);
+		}
+		User u = new User();
+		u.setNickname(username);
+		u.setPassword(password);
+		List<User> list = ud.findAllUser(u);
+		if (list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
+
+	}
+
+	/**
+	 * �ж��Ƿ����Ա
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public boolean isManageLogin(User user) {
+		if (user.getSign() == 0) {
+			return false;
+		}
+		return true;
+
+	}
+
+}

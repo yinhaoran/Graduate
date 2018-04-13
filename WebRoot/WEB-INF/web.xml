@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<display-name>TeamProject</display-name>
+	<!-- TEST -START- -->
+	<servlet>
+		<servlet-name>TestServlet</servlet-name>
+		<servlet-class>com.sys.servlet.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>/TestServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>ManageUserServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CommodityListServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.CommodityListServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CommodityDetailServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.CommodityDetailServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManageOrderServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageOrderServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManageCategoreServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageCategoreServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManageComServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageComServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManageLoginServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageLoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManageCommentServlet</servlet-name>
+		<servlet-class>com.sys.servlet.ManageCommentServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserLoginServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.UserLoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyUserPasswordServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.ModifyUserPasswordServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>CommodityDetailServlet2</servlet-name>
+		<servlet-class>com.sys.index.servlet.CommodityDetailServle2t</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>CommodityBySortServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.CommodityBySortServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>InformationServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.InformationServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ShopcartServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.ShopcartServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>TipServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.TipServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>SuggestServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.SuggestServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>OrderServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.OrderServlet</servlet-class>
+	</servlet>
+
+
+
+	<servlet>
+		<servlet-name>AddressServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.AddressServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>shopcartCheckServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.shopcartCheckServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>OrderPostServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.OrderPostServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PersonCommentServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.PersonCommentServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserIndexServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.UserIndexServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SuccessfulServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.SuccessfulServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>ShopcartCheckServlet</servlet-name>
+		<servlet-class>com.sys.index.servlet.ShopcartCheckServlet</servlet-class>
+	</servlet>
+
+
+
+
+
+
+
+	<filter>
+		<filter-name>UnicodeFilter</filter-name>
+		<filter-class>com.sys.filter.UnicodeFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>UnicodeFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<servlet-mapping>
+		<servlet-name>CommodityListServlet</servlet-name>
+		<url-pattern>/CommodityListServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CommodityDetailServlet</servlet-name>
+		<url-pattern>/CommodityDetailServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageUserServlet</servlet-name>
+		<url-pattern>/ManageUserServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageOrderServlet</servlet-name>
+		<url-pattern>/ManageOrderServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageCategoreServlet</servlet-name>
+		<url-pattern>/ManageCategoreServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageComServlet</servlet-name>
+		<url-pattern>/ManageComServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageLoginServlet</servlet-name>
+		<url-pattern>/ManageLoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManageCommentServlet</servlet-name>
+		<url-pattern>/ManageCommentServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserLoginServlet</servlet-name>
+		<url-pattern>/UserLoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyUserPasswordServlet</servlet-name>
+		<url-pattern>/ModifyUserPasswordServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>CommodityBySortServlet</servlet-name>
+		<url-pattern>/CommodityBySortServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddressServlet</servlet-name>
+		<url-pattern>/AddressServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InformationServlet</servlet-name>
+		<url-pattern>/InformationServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ShopcartServlet</servlet-name>
+		<url-pattern>/ShopcartServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>TipServlet</servlet-name>
+		<url-pattern>/TipServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>SuggestServlet</servlet-name>
+		<url-pattern>/SuggestServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OrderServlet</servlet-name>
+		<url-pattern>/OrderServlet</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>ShopcartCheckServlet</servlet-name>
+		<url-pattern>/ShopcartCheckServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OrderPostServlet</servlet-name>
+		<url-pattern>/OrderPostServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PersonCommentServlet</servlet-name>
+		<url-pattern>/PersonCommentServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserIndexServlet</servlet-name>
+		<url-pattern>/UserIndexServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SuccessfulServlet</servlet-name>
+		<url-pattern>/SuccessfulServlet</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<description>mysql数据库连接池</description>
+		<!-- 参考数据源名字,同Tomcat中配置的Resource节点中name属性值"jdbc/mysqlds"一致 -->
+		<res-ref-name>jdbc/gradute</res-ref-name>
+		<!-- 资源类型 -->
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+</web-app>

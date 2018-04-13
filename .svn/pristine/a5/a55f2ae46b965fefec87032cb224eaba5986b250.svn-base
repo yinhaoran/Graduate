@@ -1,0 +1,71 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.dao.CommentDao;
+import com.sys.dao.CommodityDao;
+import com.sys.entity.Comment;
+import com.sys.entity.Commodity;
+import com.sys.impl.CommentImpl;
+import com.sys.impl.CommodityImpl;
+
+public class CommentService {
+	int comid;
+	
+	
+	public int getComid() {
+		return comid;
+	}
+	public void setComid(int comid) {
+		this.comid = comid;
+	}
+	public List<Comment> findCommentList(){
+		CommentDao cd=new CommentImpl();
+		Comment comment=new Comment();
+		List<Comment> list=cd.findAllComment(comment);
+		
+		return list;
+		
+	}
+	/**
+	 * 根据商品ID查找商品
+	 */
+	public Commodity getCommodityById(){
+		CommodityDao cd=new CommodityImpl();
+		
+		Commodity commodity=cd.getCommodityById(comid);
+		
+		return commodity;
+		
+	}
+	
+	
+	/**
+	 * 删除商品
+	 */
+	public int deleteComment(int commentid){
+		CommentDao cd=new CommentImpl();
+		
+		
+		return cd.deleteComment(commentid);
+	}
+	/**
+	 * 根据ID查找评论
+	 * @param commentid
+	 * @return
+	 */
+	public Comment getCommentById(int commentid){
+		CommentDao cd=new CommentImpl();
+
+		return cd.getCommentById(commentid);
+	}
+	
+	
+	public List<Comment> getCommentByComId(int comid){
+		CommentDao commentdao=new CommentImpl();
+		Comment comm = new Comment();
+		comm.setComid(comid);
+		List<Comment> commlist = commentdao.findAllComment(comm); 
+		return commlist;
+	}
+}

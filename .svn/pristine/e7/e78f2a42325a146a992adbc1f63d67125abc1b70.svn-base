@@ -1,0 +1,62 @@
+package com.sys.index.service;
+
+import java.util.List;
+
+import com.sys.dao.UserDao;
+import com.sys.entity.User;
+import com.sys.impl.UserImpl;
+
+public class UserLoginService {
+
+	public User userLogin(String username, String password) {
+
+		UserDao ud = new UserImpl();
+		if (username.endsWith(".com")) {
+			User u = new User(username, password);
+			List<User> list = ud.findAllUser(u);
+			if (list.size() == 0) {
+				return null;
+			}
+			return list.get(0);
+		}
+		User u = new User();
+		u.setNickname(username);
+		u.setPassword(password);
+		List<User> list = ud.findAllUser(u);
+		
+		if (list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
+	}
+
+	public boolean isUserLogin(User user) {
+		if (user.getSign() == 1) {
+			return false;
+		}
+		return true;
+
+	}
+	
+	public int addUser(String email,String password){
+		UserDao ud = new UserImpl();
+		
+		return ud.addUser(new User(email,password));
+		
+	}
+	
+	
+	public boolean checkEmail(String email) {
+		UserDao ud = new UserImpl();
+		List<User> list = ud.findAllUser(new User());
+		
+		for (User user : list) {
+			if(email.equals(user.getEmail())){
+				return false;
+			}
+		}
+		
+		return true;
+
+	}
+}

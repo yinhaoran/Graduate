@@ -1,0 +1,65 @@
+package com.sys.entity;
+
+public class ShipAddress {
+	Integer addressid;//收货地址id
+	Integer userid;//用户id
+	String receiverperson;//收货人
+	Integer shiptelephone;//手机号码
+	String location;//所在地
+	String	detailAddress;//详细地址
+	
+	public ShipAddress(Integer addressid, Integer userid,
+			String receiverperson, Integer shiptelephone, String location,
+			String detailAddress) {
+		super();
+		this.addressid = addressid;
+		this.userid = userid;
+		this.receiverperson = receiverperson;
+		this.shiptelephone = shiptelephone;
+		this.location = location;
+		this.detailAddress = detailAddress;
+	}
+	public ShipAddress() {
+		super();
+	}
+	public Integer getAddressid() {
+		return addressid;
+	}
+	public void setAddressid(Integer addressid) {
+		this.addressid = addressid;
+	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	public String getReceiverperson() {
+		return receiverperson;
+	}
+	public void setReceiverperson(String receiverperson) {
+		this.receiverperson = receiverperson;
+	}
+	public Integer getShiptelephone() {
+		return shiptelephone;
+	}
+	public void setShiptelephone(Integer shiptelephone) {
+		this.shiptelephone = shiptelephone;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+	
+	
+	
+	
+}

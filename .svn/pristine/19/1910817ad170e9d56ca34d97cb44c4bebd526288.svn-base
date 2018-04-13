@@ -1,0 +1,69 @@
+package com.sys.entity;
+
+public class Comment {
+	private Integer commentid; 
+	private String content; 
+	private String username; 
+	private String createdate; 
+	private Integer userid;
+	private Integer comid; 
+	private Commodity commodity;
+	
+	public Commodity getCommodity() {
+		return commodity;
+	}
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
+	public Integer getCommentid() {
+		return commentid;
+	}
+	public void setCommentid(Integer commentid) {
+		this.commentid = commentid;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getCreatedate() {
+		return createdate;
+	}
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
+	}
+	public Integer getComid() {
+		return comid;
+	}
+	public void setComid(Integer comid) {
+		this.comid = comid;
+	}
+	public Comment(Integer commentid, String content, String username,
+			String createdate, Integer comid,Commodity commodity,Integer userid) {
+		super();
+		this.commentid = commentid;
+		this.content = content;
+		this.username = username;
+		this.createdate = createdate;
+		this.comid = comid;
+		this.userid = userid;
+		this.commodity = commodity;
+	}
+	public Comment() {
+		super();
+	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	
+}

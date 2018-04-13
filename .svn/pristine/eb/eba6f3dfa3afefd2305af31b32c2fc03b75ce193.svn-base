@@ -1,0 +1,39 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<!-- <base href="<%=basePath%>"> -->
+<!-- <a href="${pageContext.request.contextPath}/ManageOrderServlet?action=getOrder">查询用户信息</a> -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单详情</title>
+</head>
+<body >
+	<h1>用户订单</h1>
+	<table width="80%" border="1px">
+		<tr style="background-color: gray">
+			<td>订单id</td>
+			<td>订单成交时间</td>
+			<td>用户id</td>
+			<td>订单状态</td>
+			<td>买家留言</td>
+			<td>买的数量</td>
+			<td>用户地址</td>
+		<tr />
+		<tr style="background-color: gray">
+			<td>${order.orderid}</td>
+			<td>${order.transtime}</td>
+			<td>${order.userid}</td>
+			<td>${order.orderstatus}</td>
+			<td>${order.userwords}</td>
+			<td>${order.ordercount}</td>
+			<td>${order.addressid}</td>
+		<tr/>
+		<a href="${basePath}Manage/ManageOrder.jsp">返回主页面</a>
+	</table>
+</body>
+</html>

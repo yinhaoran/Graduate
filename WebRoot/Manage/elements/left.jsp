@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="span2 main-menu-span">
+	<div class="well nav-collapse sidebar-nav">
+		<ul class="nav nav-tabs nav-stacked main-menu">
+			<li class="nav-header hidden-tablet">功能选择</li>
+			<li><a class="ajax-link" href="/TeamProject/ManageComServlet?action=Loadcom"><i class="icon-home"></i><span class="hidden-tablet">商品管理</span></a></li>
+			<li><a class="ajax-link" href="/TeamProject/ManageUserServlet?action=list"><i class="icon-eye-open"></i><span class="hidden-tablet">用户管理</span></a></li>
+			<li><a class="ajax-link" href="/TeamProject/ManageOrderServlet?action=findAllOrder"><i class="icon-edit"></i><span class="hidden-tablet">订单管理</span></a></li>
+			<li><a class="ajax-link" href="/TeamProject/ManageCategoreServlet?action=LoadCategore"><i class="icon-list-alt"></i><span class="hidden-tablet">分类管理</span></a></li>
+			<li><a class="ajax-link" href="/TeamProject/ManageCommentServlet?action=list"><i class="icon-list-alt"></i><span class="hidden-tablet">留言管理</span></a></li>
+			<li><a class="ajax-link" href="/TeamProject/TestServlet"><i class="icon-list-alt"></i><span class="hidden-tablet">测试</span></a></li>
+		</ul>
+		
+	</div>
+</div>
+</body>
+</html>

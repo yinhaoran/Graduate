@@ -1,0 +1,19 @@
+package com.sys.index.service;
+
+import com.sys.dao.UserDao;
+import com.sys.entity.User;
+import com.sys.impl.UserImpl;
+
+public class PersonService {
+	/**
+	 * 更新用户的个人信息
+	 */
+	
+	public int updateUser(User user){
+		UserDao ud=new UserImpl();
+		int row=ud.updateUser(user);
+		
+		return row;
+		
+	}
+}

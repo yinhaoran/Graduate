@@ -1,0 +1,9 @@
+package com.sys.person.service.inter;
+
+import java.util.List;
+
+import com.sys.entity.Comment;
+
+public interface PersonCommentInt {
+	public List<Comment> findCommentListByUser(int userid);
+}

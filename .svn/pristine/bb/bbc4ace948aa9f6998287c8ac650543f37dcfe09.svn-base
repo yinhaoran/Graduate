@@ -1,0 +1,40 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sys.entity.Order;
+import com.sys.service.IOrderService;
+import com.sys.service.OrderServiceImpl;
+
+public class OrderServlet extends HttpServlet {
+
+
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		
+		
+		String action=request.getParameter("action");
+		
+		if("show".equals(action)){
+			IOrderService is=new OrderServiceImpl();
+			List<Order> list=is.findAllOrder();
+			
+			request.setAttribute("orderlist", list);
+			request.getRequestDispatcher(request.getContextPath()+"/person/order.jsp").forward(request, response);
+		}
+		out.flush();
+		out.close();
+	}
+
+}

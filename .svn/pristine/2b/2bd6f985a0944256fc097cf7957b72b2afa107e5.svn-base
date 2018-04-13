@@ -1,0 +1,7 @@
+package com.sys.index.service.Interface;
+
+import com.sys.entity.OrderDetail;
+
+public interface OrderDetailServiceInf {
+	public int addOrderDetail(OrderDetail orderdetail);
+}

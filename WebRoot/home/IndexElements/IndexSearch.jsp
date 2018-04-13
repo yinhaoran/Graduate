@@ -1,0 +1,105 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+
+<title>My JSP 'IndexSearch.jsp' starting page</title>
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+</head>
+	<style type="text/css">
+	
+		#suggest{
+				   	 position: absolute;
+					 top: 104px;
+					 left: 522px;
+					 line-height: 20px;
+				      z-index: 5555555555555;
+				      border:1px soid red;
+				       width: 520px;
+				       border-color:red;
+			}
+			
+		#suggest li{
+					padding: 5px;
+  					padding-left: 10px;
+				    background: white;
+				    width: 520px;
+				    border-color:red;
+		}
+	</style>
+	<script type="text/javascript" src="<%=basePath%>js/jquery-1.8.3.js"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#searchInput").keyup(function(){
+			var url="<%=basePath%>SuggestServlet";
+			var param = {
+				title : $("#searchInput").val()
+
+			};
+
+			$.getJSON(url, param, function(array) {
+				$("#searchInput").attr("z-index", 99);
+				$("#suggest").show();
+				$("#suggest").empty();
+				//遍历商品名称
+				$.each(array, function(i, commodity) {
+					//只显示7条数据
+					if (i < 8) {
+						var li = $("<li>" + commodity.comname + "</li>")
+						$("#suggest").append($(li));
+					}
+
+					$(li).hover(function() {
+						$(this).css("background-color", "grey");
+
+					}, function() {
+
+						$(this).css("background-color", "white");
+					})
+
+					$(li).click(function() {
+						$("#searchInput").val($(this).html());
+						$("#suggest").hide();
+					})
+
+					$("#suggest").mouseleave(function() {
+
+						$("#suggest").hide();
+
+					})
+
+				})
+
+			})
+
+		})
+
+	})
+</script>
+
+<body>
+	<div>
+		<ul id="suggest" style="display:none"></ul>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+package com.sys.index.service.Interface;
+
+import java.util.List;
+
+import com.sys.entity.ShopCart;
+
+public interface ShopcartServiceInt {
+	/**
+	 * 根据用户id查找购物车项目
+	 * @param userid
+	 * @return 
+	 */
+	public List<ShopCart> getShopCartByUserId(Integer userid);
+	/**
+	 * 根据用户id删除购物车项目
+	 * @param userid
+	 * @return
+	 */
+	public int deleShopcartByuserid(int userid);
+	/**
+	 * 根据购物车项目id删除购物车项目
+	 * @param shopcartid
+	 * @return
+	 */
+	
+	
+	public int deleShopcartByshopcartid(int shopcartid);
+	/**
+	 * 添加购物车项目  根据用户id来分辨购物车
+	 * @return
+	 */
+	public int addShopcart(ShopCart shopcart);
+	/**
+	 * 修改购物车  商品数量等
+	 * @param shopcart
+	 * @return
+	 */
+	public int updateShopcart(ShopCart shopcart);
+	
+	public ShopCart isExistCommodity(int userid,int comid);
+}

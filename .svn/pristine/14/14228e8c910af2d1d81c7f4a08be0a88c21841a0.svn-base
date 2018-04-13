@@ -1,0 +1,36 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.entity.Order;
+import com.sys.entity.OrderMange;
+
+/**
+ * 用户订单表接口
+ * 
+ * @author lenovo
+ * 
+ */
+public interface IOrderService {
+	// 1添加用户订单
+	public int addOrder(Order order);
+
+	// 2删除用户订单
+	public int deleteOrder(Integer orderid);
+
+	// 3修改用户订单
+	public int updateOrder(Order order);
+
+	// 4查询用户订单详情
+	public Order getOrderById(Integer orderid);
+
+	// 5查询用户所有订单
+	public List<Order> findAllOrder(Order order);
+
+	public List<Order> findAllOrder();
+	
+	//6查询订单管理页面
+	
+	public List<OrderMange> findDetail(int userid);
+
+}

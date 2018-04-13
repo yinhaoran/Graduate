@@ -1,0 +1,48 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sys.entity.Commodity;
+import com.sys.entity.Sort;
+import com.sys.index.service.CommodityListService;
+import com.sys.service.CommodityService;
+import com.sys.service.CommodityServiceImp;
+import com.sys.service.SortService;
+import com.sys.service.SortServiceImpl;
+
+public class CommodityListServlet extends HttpServlet {
+
+	
+	SortService sortservice = new SortServiceImpl();
+	CommodityService commodityservice = new CommodityServiceImp();
+	Sort sort = new Sort();
+	
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setContentType("text/html;charset:utf-8");
+		PrintWriter out = response.getWriter();
+		List<Sort> sortsList = sortservice.findAllSort(sort);
+
+		CommodityListService commListService = new CommodityListService();
+		List<Commodity> coffeelist =  commListService.findCommodityBySortId(1);
+		List<Commodity> colalist =  commListService.findCommodityBySortId(2);
+		request.setAttribute("coffeelist", coffeelist);
+		request.setAttribute("sortsList", sortsList);
+		request.setAttribute("colalist", colalist);
+		
+		
+		request.getRequestDispatcher("/home/home.jsp").forward(request, response);
+		/*List<Commodity> Colalist =  commListService.findCommodityBySortId(2);
+		List<Commodity> Colalist =  commListService.findCommodityBySortId(2);
+		List<Commodity> Colalist =  commListService.findCommodityBySortId(2);
+		List<Commodity> Colalist =  commListService.findCommodityBySortId(2);*/
+	}
+
+}

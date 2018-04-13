@@ -1,0 +1,23 @@
+package com.sys.dao;
+
+import java.util.List;
+
+import com.sys.entity.OrderDetail;
+import com.sys.entity.ShipAddress;
+
+public interface OrderDetailDao {
+	public int addOrderDetail(OrderDetail orderdetail);
+	public void insertOrderDetail(OrderDetail orderdetail);
+	public int updateOrderDetail(OrderDetail orderdetail);
+	public int deleteOrderDetail(int detailid);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<OrderDetail> findAllOrderDetail(OrderDetail orderdetail);
+	/**
+	 * ¸ù¾İID²éÕÒ
+	 */
+	public OrderDetail getOrderDetailById(int detailid);
+}

@@ -1,0 +1,47 @@
+package com.sys.entity;
+
+public class ShopCart {
+	private Integer shopcartid;
+	private Integer comid;
+	private Integer comcount;
+	private Integer userid;
+	
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	public Integer getShopcartid() {
+		return shopcartid;
+	}
+	public void setShopcartid(Integer shopcartid) {
+		this.shopcartid = shopcartid;
+	}
+	public Integer getComid() {
+		return comid;
+	}
+	public void setComid(Integer comid) {
+		this.comid = comid;
+	}
+	public Integer getComcount() {
+		return comcount;
+	}
+	public void setComcount(Integer comcount) {
+		this.comcount = comcount;
+	}
+	
+	public ShopCart(Integer shopcartid, Integer comid, Integer comcount,
+			Integer userid) {
+		super();
+		this.shopcartid = shopcartid;
+		this.comid = comid;
+		this.comcount = comcount;
+		this.userid = userid;
+	}
+	public ShopCart() {
+		super();
+	}
+	
+	
+}

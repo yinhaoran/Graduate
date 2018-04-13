@@ -1,0 +1,48 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.dao.UserDao;
+import com.sys.entity.User;
+import com.sys.impl.UserImpl;
+
+public class UserService {
+	/**
+	 * 查询所有的用户
+	 * @return
+	 */
+	public List<User> findUser(){
+		
+		UserDao ud=new UserImpl();
+		
+		List<User> list=ud.findAllUser(new User());
+		return list;
+		
+	}
+	/**
+	 * 删除用户
+	 */
+	public int deleteUser(int userid){
+		UserDao ud=new UserImpl();
+		
+		return ud.deleteUser(userid);
+		
+	}
+	
+	public User getUserById(int userid){
+		UserDao ud=new UserImpl();
+		User user=ud.getUserById(userid);
+		return user;
+	}
+	
+	/**
+	 * 更改用户的信息
+	 */
+	public int upDateUser(User user){
+		UserDao ud=new UserImpl();
+		int row=ud.updateUser(user);
+		System.out.println(row);
+		return row;
+	}
+	
+}

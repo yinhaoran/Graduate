@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="TeamProject"
+  id="myeclipse.1491362802385"
+  context-root="/TeamProject"
+  j2ee-spec="5.0"
+  archive="TeamProject.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,83 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sys.entity.ShipAddress;
+import com.sys.entity.User;
+import com.sys.index.service.AddressService;
+
+public class AddressServlet extends HttpServlet {
+	/**
+	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).
+	 * 
+	 * @since JDK 1.8
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset:UTF-8");
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		String action = request.getParameter("action");
+		StringBuffer location = new StringBuffer();
+		AddressService as = new AddressService();
+		User user = (User) session.getAttribute("user");
+		if ("show".equals(action)) {
+			List<ShipAddress> list = as.getAddress(user.getUserid());
+			if (list.size() == 0) {
+				out.print("<script>alert('您没有收货地址，请先添加一个地址吧！！');location='" + request.getContextPath()
+						+ "/person/address.jsp'</script>");
+			} else {
+				request.setAttribute("addList", list);
+				request.getRequestDispatcher("person/address.jsp").forward(request, response);
+			}
+		} else if ("address".equals(action)) {
+			String receiverperson = request.getParameter("receiverperson");
+			String shiptelephone = request.getParameter("shiptelephone");
+			location.append(request.getParameter("province") + " ");
+			location.append(request.getParameter("city"));
+			String detailAddress = request.getParameter("detailaddress");
+			if (request.getParameter("addressid") != "") {
+				String addressid = request.getParameter("addressid");
+				boolean flag = as.updateAddress(new ShipAddress(addressid, user.getUserid(), receiverperson,
+						shiptelephone, location.toString(), detailAddress));
+				if (flag) {
+					out.print("<script>alert('修改地址成功！');location='" + request.getContextPath()
+							+ "/AddressServlet?action=show'</script>");
+				} else {
+					out.print("<script>alert('修改地址失败！');location='" + request.getContextPath()
+							+ "/AddressServlet?action=show'</script>");
+				}
+			} else {
+				boolean flag = as.addAddress(new ShipAddress(user.getUserid(), receiverperson, shiptelephone,
+						location.toString(), detailAddress));
+				if (flag) {
+					out.print("<script>alert('添加地址成功！');location='" + request.getContextPath()
+							+ "/AddressServlet?action=show'</script>");
+				} else {
+					out.print("<script>alert('添加地址失败！');location='" + request.getContextPath()
+							+ "/AddressServlet?action=show'</script>");
+				}
+			}
+		} else if ("changeAddress".equals(action)) {
+			String addressid = request.getParameter("addressid");
+			boolean isOK = as.updateSign(addressid);
+			out.print(isOK);
+		} else if ("deleteAddress".equals(action)) {
+			String addressid = request.getParameter("addressid");
+			boolean flag = as.deleteAddress(addressid);
+			out.print(flag);
+		}
+		out.flush();
+		out.close();
+	}
+}

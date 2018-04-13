@@ -1,0 +1,38 @@
+package com.sys.index.service;
+
+import java.util.List;
+
+import com.sys.dao.OrderDao;
+import com.sys.dao.OrderDetailDao;
+import com.sys.dao.ShopCartDao;
+import com.sys.entity.Order;
+import com.sys.entity.OrderDetail;
+import com.sys.entity.ShopCart;
+import com.sys.impl.OrderDetailImpl;
+import com.sys.impl.OrderImpl;
+import com.sys.impl.ShopCartImpl;
+import com.sys.index.service.Interface.IndexOrderServiceInt;
+
+public class IndexOrderServiceImpl implements IndexOrderServiceInt {
+
+	public int insertOrder(Order order, List<ShopCart> list) {
+		OrderDao orderdao = new OrderImpl();
+		int orderid = orderdao.insertOrder(order);
+
+		OrderDetailDao orderdetaildao = new OrderDetailImpl();
+		for (ShopCart shopCart : list) {
+			
+			System.out.println(shopCart.toString());
+			OrderDetail orderdetail = new OrderDetail();
+			orderdetail.setComid(shopCart.getComid());
+			orderdetail.setComcount(shopCart.getComcount());
+			orderdetail.setOrderid(orderid);
+			orderdetaildao.insertOrderDetail(orderdetail);
+		}
+		ShopCartDao shopcartdao = new ShopCartImpl();
+		int userid = order.getUserid();
+		int i = shopcartdao.deleteShopCartByUserid(userid);
+		return i;
+	}
+
+}

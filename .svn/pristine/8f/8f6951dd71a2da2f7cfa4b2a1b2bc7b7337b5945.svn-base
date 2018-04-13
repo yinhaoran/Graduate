@@ -1,0 +1,14 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.entity.Commodity;
+
+
+public interface CommodityService {
+	public int AddCommodity(Commodity comm); 
+    public List<Commodity> showCommdity(); 
+    public int deleteCommodity(int comid);
+    public int updateCommodity(Commodity commodity);
+    public Commodity findCommodityById(int comid);
+}

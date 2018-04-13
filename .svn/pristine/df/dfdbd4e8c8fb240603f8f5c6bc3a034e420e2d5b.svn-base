@@ -1,0 +1,40 @@
+package com.sys.service;
+
+import java.util.List;
+
+import com.sys.dao.CommodityDao;
+import com.sys.entity.Commodity;
+import com.sys.impl.CommodityImpl;
+
+public class CommodityServiceImp implements CommodityService {
+	CommodityDao commoditydao = new CommodityImpl();
+	Commodity commodity = new Commodity();
+	public int AddCommodity(Commodity comm) {
+		int row = commoditydao.addCommodity(comm);
+		return row;
+	}
+
+	public List<Commodity> showCommdity() {
+		
+		List<Commodity> list = commoditydao.findAllCommodity(commodity);
+		return list;
+	}
+
+	public int deleteCommodity(int comid) {
+		int row = commoditydao.deleteCommodity(comid);
+		return row;
+	}
+
+	public int updateCommodity(Commodity commodity) {
+		// TODO Auto-generated method stub
+		int row = commoditydao.updateCommodity(commodity);
+		return row;
+	}
+
+	public Commodity findCommodityById(int comid) {
+		Commodity comm = commoditydao.getCommodityById(comid);
+		return comm;
+	}
+	
+	
+}

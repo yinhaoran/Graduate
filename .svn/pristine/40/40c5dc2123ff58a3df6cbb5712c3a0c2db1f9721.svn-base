@@ -1,0 +1,26 @@
+package com.sys.index.service;
+
+import com.sys.dao.UserDao;
+import com.sys.entity.User;
+import com.sys.impl.UserImpl;
+/**
+ * 账户安全设置
+ * 
+ * @author lenovo
+ * 
+ */
+public class ModifyUserPasswordServiceImpl implements IModifyUserPasswordService {
+	UserDao userDao = new UserImpl();
+	
+	// 1. 修改用户密码
+	public int updateUserPwd(User user) {
+		return userDao.updateUser(user);
+		
+	}
+	
+	// 7.查询用户信息,作为修改验证
+	public User getUserById(int userid) {
+		return userDao.getUserById(userid);
+	}
+
+}

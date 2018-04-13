@@ -1,0 +1,64 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sys.entity.Order;
+import com.sys.entity.ShopCart;
+import com.sys.entity.User;
+import com.sys.index.service.IndexOrderServiceImpl;
+import com.sys.index.service.Interface.IndexOrderServiceInt;
+import com.sys.tool.MakeOrderNum;
+
+public class OrderPostServlet extends HttpServlet {
+	IndexOrderServiceInt orderservice = new IndexOrderServiceImpl();
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset:utf-8");
+		PrintWriter out = response.getWriter();
+		String action = request.getParameter("action");
+		if("orderPost".equals(action)){
+			orderPost(request, response);
+		}
+	}
+	public void orderPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int userid = user.getUserid();
+		//收货地址没写
+		int addressid = 3;
+		String transtime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		@SuppressWarnings("unchecked")
+		List<ShopCart> list =  (List<ShopCart>) session.getAttribute("shopcartlist");
+		String userwords = request.getParameter("userwords");
+		MakeOrderNum ordernum = new MakeOrderNum();
+		
+		Integer orderid = ordernum.makeOrderNum();
+		Order order = new Order(orderid, transtime, userid, userwords, addressid);
+		int result = orderservice.insertOrder(order, list);
+		
+		if(result > 0){
+			out.print("<script type='text/javascript'>");
+			out.print("alert('提交订单成功');location='"+request.getContextPath()+"/shopcartCheckServlet?action=checkout'");
+			out.print("</script>");	
+		}else{
+			out.print("<script type='text/javascript'>");
+			out.print("alert('提交订单失败');location='"+request.getContextPath()+"/shopcartCheckServlet?action=checkout'");
+			out.print("</script>");	
+		}
+		
+	}
+	
+}

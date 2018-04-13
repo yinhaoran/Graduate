@@ -1,0 +1,33 @@
+package com.sys.entity;
+
+public class Sort {
+	private  Integer sortid;
+	private String sortname;
+	
+	public Integer getSortid() {
+		return sortid;
+	}
+	public void setSortid(Integer sortid) {
+		this.sortid = sortid;
+	}
+	public String getSortname() {
+		return sortname;
+	}
+	public void setSortname(String sortname) {
+		this.sortname = sortname;
+	}
+	public Sort(Integer sortid, String sortname) {
+		super();
+		this.sortid = sortid;
+		this.sortname = sortname;
+	}
+	public Sort() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "Sort [sortid=" + sortid + ", sortname=" + sortname + "]";
+	}
+	
+	
+}

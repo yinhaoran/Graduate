@@ -1,0 +1,20 @@
+package com.sys.person.service.impl;
+
+import java.util.List;
+
+import com.sys.dao.CommentDao;
+import com.sys.entity.Comment;
+import com.sys.impl.CommentImpl;
+import com.sys.person.service.inter.PersonCommentInt;
+
+public class PersonCommentImpl implements PersonCommentInt {
+
+	public List<Comment> findCommentListByUser(int userid) {
+		Comment comment = new Comment();
+		comment.setUserid(userid);
+		CommentDao commentdao = new CommentImpl();
+		List<Comment> list = commentdao.findAllComment(comment);
+		return list;
+	}
+
+}

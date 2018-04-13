@@ -1,0 +1,37 @@
+package com.sys.entity;
+
+public class ShopCart {
+	private Integer shopcartid;
+	private Integer comid;
+	private Integer comcount;
+	
+	public Integer getShopcartid() {
+		return shopcartid;
+	}
+	public void setShopcartid(Integer shopcartid) {
+		this.shopcartid = shopcartid;
+	}
+	public Integer getComid() {
+		return comid;
+	}
+	public void setComid(Integer comid) {
+		this.comid = comid;
+	}
+	public Integer getComcount() {
+		return comcount;
+	}
+	public void setComcount(Integer comcount) {
+		this.comcount = comcount;
+	}
+	public ShopCart(Integer shopcartid, Integer comid, Integer comcount) {
+		super();
+		this.shopcartid = shopcartid;
+		this.comid = comid;
+		this.comcount = comcount;
+	}
+	public ShopCart() {
+		super();
+	}
+	
+	
+}

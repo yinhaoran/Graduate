@@ -1,0 +1,12 @@
+#Tue Apr 11 14:56:39 CST 2017
+=\=\=\=\=\=\=
+<<<<<<<=.mine
+>>>>>>>=.r73
+eclipse.preferences.version=1
+encoding//src/com/sys/index/servlet/UserLoginServlet.java=UTF-8
+encoding//src/com/sys/service/UserService.java=UTF-8
+encoding//src/com/sys/servlet/ManageCategoreServlet.java=GBK
+encoding//src/com/sys/servlet/ManageComServlet.java=GBK
+encoding//src/com/sys/servlet/ManageLoginServlet.java=UTF-8
+encoding//src/com/sys/servlet/ManageUserServlet.java=GBK
+encoding//src/com/sys/tool/MakeOrderNum.java=GBK

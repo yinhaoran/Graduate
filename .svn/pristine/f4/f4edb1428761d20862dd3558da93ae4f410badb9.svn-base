@@ -1,0 +1,80 @@
+package com.sys.entity;
+
+public class Order {
+
+	private Integer orderid;//订单id
+	private String transtime;//订单成交时间
+	private Integer userid;//用户id
+	private Integer orderstatus;//订单状态 1.待付款 2.待发货 3.待收货 4.待评价
+	private String userwords;//买家留言
+	private Integer ordercount;//买的数量
+	private Integer addressid;//用户地址
+	
+	
+	public Integer getAddressid() {
+		return addressid;
+	}
+	public void setAddressid(Integer addressid) {
+		this.addressid = addressid;
+	}
+	public Integer getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(Integer orderid) {
+		this.orderid = orderid;
+	}
+	public String getTranstime() {
+		return transtime;
+	}
+	public void setTranstime(String transtime) {
+		this.transtime = transtime;
+	}
+	public Integer getUserid() {
+		return userid;
+	}
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+	public Integer getOrderstatus() {
+		return orderstatus;
+	}
+	public void setOrderstatus(Integer orderstatus) {
+		this.orderstatus = orderstatus;
+	}
+	public String getUserwords() {
+		return userwords;
+	}
+	public void setUserwords(String userwords) {
+		this.userwords = userwords;
+	}
+	public Integer getOrdercount() {
+		return ordercount;
+	}
+	public void setOrdercount(Integer ordercount) {
+		this.ordercount = ordercount;
+	}
+	public Order() {
+		super();
+	}
+	public Order(Integer orderid, String transtime, Integer userid,
+			Integer orderstatus, String userwords, Integer ordercount,
+			Integer addressid) {
+		super();
+		this.orderid = orderid;
+		this.transtime = transtime;
+		this.userid = userid;
+		this.orderstatus = orderstatus;
+		this.userwords = userwords;
+		this.ordercount = ordercount;
+		this.addressid = addressid;
+	}
+	public Order(Integer orderid, String transtime, Integer userid,
+			String userwords, Integer addressid) {
+		super();
+		this.orderid = orderid;
+		this.transtime = transtime;
+		this.userid = userid;
+		this.userwords = userwords;
+		this.addressid = addressid;
+	}
+}

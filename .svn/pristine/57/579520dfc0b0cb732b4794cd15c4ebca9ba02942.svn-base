@@ -1,0 +1,10 @@
+package com.sys.index.service.Interface;
+
+import java.util.List;
+
+import com.sys.entity.Order;
+import com.sys.entity.ShopCart;
+
+public interface IndexOrderServiceInt {
+	public int insertOrder(Order order,List<ShopCart> list);
+}

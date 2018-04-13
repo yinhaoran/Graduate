@@ -1,0 +1,178 @@
+package com.sys.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sys.dao.BaseDao;
+import com.sys.dao.ShipAddressDao;
+import com.sys.entity.ShipAddress;
+
+public class ShipAddressImpl extends BaseDao implements ShipAddressDao {
+
+	public int addShipAddress(ShipAddress shipAddress) {
+		String sql="insert into tb_shipaddress values(seq_AddressId.nextval,?,?,?,?)";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+		
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, shipAddress.getUserid());
+			pst.setString(2, shipAddress.getReceiverperson());
+			pst.setInt(3, shipAddress.getShiptelephone());
+			pst.setString(4, shipAddress.getDetailAddress());
+			
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con,pst,null);
+		}
+		return row;
+		
+		
+	}
+
+	public int updateUser(ShipAddress shipAddress) {
+		String sql="update tb_shipaddress set userid=?,receiverperson=?,shiptelephone=?,location=?,detailAddress=?  where addressid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, shipAddress.getUserid());
+			pst.setString(2, shipAddress.getReceiverperson());
+			pst.setInt(3, shipAddress.getShiptelephone());
+			pst.setString(4, shipAddress.getDetailAddress());
+			pst.setInt(5,shipAddress.getAddressid() );
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public int deleteUser(int addressid) {
+
+		String sql="delete from tb_shipaddress where addressid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		int row=0;
+
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1,addressid);
+			row=pst.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, null);
+		}
+		return row;
+	}
+
+	public List<ShipAddress> findAllShipAddress(ShipAddress shipAddress) {
+		String sql="select * from tb_userinfo where 1=1";
+		if(shipAddress.getUserid()!=null){
+			sql+="and userid='"+shipAddress.getUserid()+"'";
+			
+		}
+		if(shipAddress.getAddressid()!=null){
+			sql+="and addressid='"+shipAddress.getUserid()+"'";
+			
+		}
+		if(shipAddress.getReceiverperson()!=null){
+			sql+="and receiverperson='"+shipAddress.getReceiverperson()+"'";
+			
+		}
+		if(shipAddress.getShiptelephone()!=null){
+			sql+="and shiptelephone='"+shipAddress.getShiptelephone()+"'";
+			
+		}
+		if(shipAddress.getLocation()!=null){
+			sql+="and location='"+shipAddress.getLocation()+"'";
+			
+		}
+		if(shipAddress.getDetailAddress()!=null){
+			sql+="and detailAddress='"+shipAddress.getDetailAddress()+"'";
+			
+		}
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		List<ShipAddress> list =new ArrayList<ShipAddress>();
+		try {
+			pst=con.prepareStatement(sql);
+			rs=pst.executeQuery();
+			while(rs.next()){
+//				Integer addressid;//收货地址id
+//				Integer userid;//用户id
+//				String receiverperson;//收货人
+//				Integer shiptelephone;//手机号码
+//				String location;//所在地
+//				String	detailAddress;//详细地址
+				ShipAddress sa=new ShipAddress();
+				sa.setAddressid(rs.getInt("addressid"));
+				sa.setUserid(rs.getInt("userid"));
+				sa.setReceiverperson(rs.getString("receiverperson"));
+				sa.setShiptelephone(rs.getInt("shiptelephone"));
+				sa.setLocation(rs.getString("location"));
+				sa.setDetailAddress(rs.getString("detailAddress"));
+				
+				list.add(sa);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		
+		
+		return list;
+		
+		
+	}
+
+	public ShipAddress getShipAddressById(int addressid) {
+		String sql="select * from tb_shipaddress where addressid=?";
+		Connection con=super.getConnection();
+		PreparedStatement pst= null;
+		ResultSet rs=null;
+		ShipAddress sa=null;
+		try {
+			pst=con.prepareStatement(sql);
+			pst.setInt(1, addressid);
+			rs=pst.executeQuery();
+			
+			while(rs.next()){
+				sa=new ShipAddress();
+				sa.setAddressid(rs.getInt("addressid"));
+				sa.setUserid(rs.getInt("userid"));
+				sa.setReceiverperson(rs.getString("receiverperson"));
+				sa.setShiptelephone(rs.getInt("shiptelephone"));
+				sa.setLocation(rs.getString("location"));
+				sa.setDetailAddress(rs.getString("detailAddress"));
+				
+			}
+			
+		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			super.closeDB(con, pst, rs);
+		}
+		return  sa;
+	}
+
+}

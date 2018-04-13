@@ -1,0 +1,37 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sys.entity.Comment;
+import com.sys.entity.Commodity;
+import com.sys.service.CommentService;
+import com.sys.service.CommodityService;
+import com.sys.service.CommodityServiceImp;
+
+public class CommodityDetailServlet extends HttpServlet {
+	
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		response.setContentType("text/html;charset:utf-8");
+		PrintWriter out = response.getWriter();
+		Integer comid = Integer.parseInt(request.getParameter("comid"));
+		CommodityService commodityservice = new CommodityServiceImp();
+		Commodity commdetail = commodityservice.findCommodityById(comid);
+		CommentService commentservice = new CommentService();
+		List<Comment> commentList = commentservice.getCommentByComId(comid);
+
+		request.setAttribute("commentList", commentList);
+		request.setAttribute("commdetail", commdetail);
+		request.getRequestDispatcher("/home/CommodityDetail.jsp").forward(request, response);
+		
+	}
+
+}

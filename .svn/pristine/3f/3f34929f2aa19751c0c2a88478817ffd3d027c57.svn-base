@@ -1,0 +1,58 @@
+package com.sys.index.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.sys.entity.User;
+import com.sys.index.service.IModifyUserPasswordService;
+import com.sys.index.service.ModifyUserPasswordServiceImpl;
+import com.sys.index.service.UserLoginService;
+
+public class UserLoginServlet extends HttpServlet {
+
+	public void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1-设置服务器端以UTF-8编码进行输出
+				request.setCharacterEncoding("UTF-8");
+				
+				// 2-设置浏览器以UTF-8编码进行接收,解决中文乱码问题
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				HttpSession session = request.getSession();
+				
+				// 3 获取保存正在页面的用户id及密码
+				int userid = Integer.parseInt(request.getParameter("userid"));
+				String password = request.getParameter("password");
+				
+				IModifyUserPasswordService modifyUserPwd = new ModifyUserPasswordServiceImpl();
+				// 3  查询用户信息,根据用户用userid的密码用Ajxs作为修改验证，如匹配进行密码修改
+				User user2 = modifyUserPwd.getUserById(userid);
+				String pwd = user2.getPassword();
+				
+				// 3-2 再把3-获取的密码进行判断
+				User user = new User(); 
+				if (pwd.equals(password)) {
+					// 3-2-1  匹配成功修改用户密码
+					user.setPassword(password);
+					int row = modifyUserPwd.updateUserPwd(user);
+						if (row > 0) {
+							// 3-2-1 修改成功
+							out.print("<script>alert(' 修改成功！');location='"+request.getContextPath()+"/person/password.jsp'</script>");
+						} else {
+							// 3-2-1 修改失败
+							out.print("<script>alert(' 修改失败！');location='"+request.getContextPath()+"/person/password.jsp'</script>");
+						}		
+					}
+		
+		
+		
+	}
+
+	
+}
