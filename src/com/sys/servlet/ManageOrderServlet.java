@@ -10,10 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sys.entity.Order;
+import com.sys.entity.OrderDetail;
+import com.sys.entity.ShipAddress;
+import com.sys.index.service.AddressService;
+import com.sys.index.service.OrderDetailImpl;
 import com.sys.index.service.OrderServiceImpl;
+import com.sys.index.service.itf.IOrderDetailService;
 import com.sys.index.service.itf.IOrderService;
 
 public class ManageOrderServlet extends HttpServlet {
+	
+	private IOrderDetailService detaillService;
 	/**
 	 * 用户订单管理
 	 */
@@ -69,9 +76,25 @@ public class ManageOrderServlet extends HttpServlet {
 		String orderid = request.getParameter("orderid");
 		IOrderService iorder = new OrderServiceImpl();
 		Order order = iorder.getOrderById(orderid);
+		AddressService addService = new AddressService();
+		ShipAddress addressinfo = new ShipAddress();
+		addressinfo.setAddressid(order.getAddressid());
+		String address = addService.findAddress(addressinfo).getDetailAddress();
 		request.setAttribute("order", order);
+		request.setAttribute("address", address);
+		List<OrderDetail> detailList = getDetailService().getOrderDetailList(orderid);
+		request.setAttribute("detailList", detailList);
 		request.getRequestDispatcher("/Manage/ManageOrderl.jsp").forward(
 				request, response);
 	}
+	
+	
+	private IOrderDetailService getDetailService() {
+		if(detaillService == null) {
+			return new OrderDetailImpl();
+		}
+		return detaillService;
+	}
+	
 
 }

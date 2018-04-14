@@ -132,8 +132,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  <th>订单号</th>
 								  <th>订单交易时间</th>
 								  <th>用户Id</th>
-								  <th>订单状态</th>
 								  <th>金额</th>
+								  <th>订单状态</th>
 								  <th>操作</th>
 							  </tr>
 						  </thead>   
@@ -145,7 +145,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td class="center">${order.transtime}</td>
 								<td class="center">${order.userid}</td>
 								<td class="center">${order.total}</td>
-								<td class="center">${order.orderstatus}</td>
+								<td class="center">
+								<c:if test="${order.orderstatus == 1}">
+								已付款
+								</c:if>
+								</td>
 								<td class="center">
 									<a class="btn btn-success" href="<%=basePath%>ManageOrderServlet?action=getOrder&orderid=${order.orderid}">
 										<i class="icon-zoom-in icon-white"></i>  

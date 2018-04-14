@@ -41,9 +41,9 @@ public class UserService {
 		List<User> list = getUserDao().findAllUser(user);
 		if (list.size() == 0 || list == null) {
 			throw new Exception("用户不存在或密码错误");
-		} else if (list.size() > 0 && !isManageLogin(list.get(0))) {
+		} /*else if (list.size() > 0 && !isManageLogin(list.get(0))) {
 			throw new Exception("用户身份不是管理员");
-		}
+		}*/
 		return list.get(0);
 	}
 

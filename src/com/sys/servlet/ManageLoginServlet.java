@@ -41,7 +41,7 @@ public class ManageLoginServlet extends HttpServlet {
 				if (user != null) {
 					if ("1".equals(user.getSign())) {
 						session.setAttribute("admin", user);
-						out.print("<script>location='" + request.getContextPath()
+						out.print("<script>alert('登录成功！');location='" + request.getContextPath()
 								+ "/ManageUserServlet?action=list'</script>");
 					} else {
 						out.print("<script>alert('身份验证错误,此用户不是管理员');location='" + request.getContextPath()

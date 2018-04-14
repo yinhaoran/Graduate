@@ -119,7 +119,7 @@
 										</p>
 									</div>
 									<div class="new-addr-btn">
-										<a href=" javascript:update(${status.index},${address.addressid})"><i class="am-icon-edit"></i>编辑</a> 
+										<a href="javascript:update(${status.index},${address.addressid})"><i class="am-icon-edit"></i>编辑</a> 
 										<span class="new-addr-bar">|</span> 
 										<a href="<%=basePath %>/AddressServlet?action=show" onclick="delClick(${address.addressid});"><i class="am-icon-trash"></i>删除</a>
 									</div></li>
@@ -303,7 +303,6 @@
 					}
 					function changeAddress(i){
 						var url = "<%=request.getContextPath()%>/AddressServlet?action=changeAddress";
-						
 						var param ={
 							addressid:i
 						};
@@ -316,7 +315,6 @@
 					function update(index,addressid){
 						$("#user-name").val($("#name"+index).text());
 						$("#user-phone").val($("#phone"+index).text());
-						
 						$("#province option").each(function(){							
 							if($(this).val()==$("#province"+index).text()){							
 								$(this).val($("#province"+index).text()).attr("selected","selected");
@@ -331,8 +329,6 @@
 								});	
 							}	
 						});
-						
-						
 						$("#addressid").val(addressid);				
 						$("#user-intro").val($("#street"+index).text());
 					}

@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.sys.dao.BaseDao;
 import com.sys.dao.OrderDetailDao;
+import com.sys.entity.Commodity;
 import com.sys.entity.OrderDetail;
 import com.sys.tool.PrimaryKeyCreator;
 
@@ -73,18 +74,18 @@ public class OrderDetailImpl extends BaseDao implements OrderDetailDao {
 	}
 
 	public List<OrderDetail> findAllOrderDetail(OrderDetail orderdetail) {
-		String sql = "select * from tb_orderdetail where 1=1";
+		String sql = "select * from tb_orderdetail a left join tb_commodity b on a.comid = b.comid where 1=1";
 		if (orderdetail.getComid() != null) {
-			sql += "and comid='" + orderdetail.getComid() + "'";
+			sql += " and comid='" + orderdetail.getComid() + "'";
 		}
 		if (orderdetail.getComcount() != null) {
-			sql += "and comcount='" + orderdetail.getComcount() + "'";
+			sql += " and comcount='" + orderdetail.getComcount() + "'";
 		}
 		if (orderdetail.getDetailid() != null) {
-			sql += "and detailid='" + orderdetail.getDetailid() + "'";
+			sql += " and detailid='" + orderdetail.getDetailid() + "'";
 		}
 		if (orderdetail.getOrderid() != null) {
-			sql += "and orderid='" + orderdetail.getOrderid() + "'";
+			sql += " and orderid='" + orderdetail.getOrderid() + "'";
 		}
 		Connection con = super.getConnection();
 		PreparedStatement pst = null;
@@ -95,10 +96,13 @@ public class OrderDetailImpl extends BaseDao implements OrderDetailDao {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				OrderDetail od = new OrderDetail();
-				od.setDetailid(rs.getString("detailid"));
-				od.setOrderid(rs.getString("orderid"));
-				od.setComid(rs.getString("comid"));
-				od.setComcount(rs.getInt("comcount"));
+				od.setDetailid(rs.getString("a.detailid"));
+				od.setOrderid(rs.getString("a.orderid"));
+				od.setComid(rs.getString("a.comid"));
+				od.setComcount(rs.getInt("a.comcount"));
+				Commodity comm = new Commodity();
+				comm.setComname(rs.getString("b.comname"));
+				od.setCommodity(comm);
 				list.add(od);
 			}
 		} catch (SQLException e) {

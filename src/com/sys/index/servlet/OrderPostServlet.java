@@ -62,20 +62,20 @@ public class OrderPostServlet extends HttpServlet {
 						shiptelephone, location.toString(), detailAddress));
 				if (flag) {
 					out.print("<script>alert('修改地址成功！');location='" + request.getContextPath()
-							+ "/shopcartCheckServlet?action=checkout'</script>");
+							+ "/ShopcartCheckServlet?action=checkout'</script>");
 				} else {
 					out.print("<script>alert('修改地址失败！');location='" + request.getContextPath()
-							+ "/shopcartCheckServlet?action=checkout'</script>");
+							+ "/ShopcartCheckServlet?action=checkout'</script>");
 				}
 			} else {
 				boolean flag = as.addAddress(new ShipAddress(user.getUserid(), receiverperson, shiptelephone,
 						location.toString(), detailAddress));
 				if (flag) {
 					out.print("<script>alert('添加地址成功！');location='" + request.getContextPath()
-							+ "/shopcartCheckServlet?action=checkout'</script>");
+							+ "/ShopcartCheckServlet?action=checkout'</script>");
 				} else {
 					out.print("<script>alert('添加地址失败！');location='" + request.getContextPath()
-							+ "/shopcartCheckServlet?action=checkout'</script>");
+							+ "/ShopcartCheckServlet?action=checkout'</script>");
 				}
 			}
 		}
@@ -86,7 +86,7 @@ public class OrderPostServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		String userid = user.getUserid();
-		String addressid = request.getParameter("addressid");
+		String addressid = getAddressService().getDefAddrByUserid(userid).getAddressid();
 		String transtime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		@SuppressWarnings("unchecked")
 		List<ShopCart> list = (List<ShopCart>) session.getAttribute("shopcartlist");
@@ -104,5 +104,9 @@ public class OrderPostServlet extends HttpServlet {
 		ShipAddress shipAddress = addressService.findAddress(addressid);
 		request.setAttribute("address", shipAddress);
 		request.getRequestDispatcher("/home/success.jsp").forward(request, response);
+	}
+	
+	public AddressService getAddressService() {
+		return new AddressService();
 	}
 }

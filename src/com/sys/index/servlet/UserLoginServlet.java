@@ -14,9 +14,10 @@ import com.sys.index.service.UserService;
 
 public class UserLoginServlet extends HttpServlet {
 
-	/**  
-	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).  
-	 * @since JDK 1.8  
+	/**
+	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).
+	 * 
+	 * @since JDK 1.8
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -37,8 +38,8 @@ public class UserLoginServlet extends HttpServlet {
 				session.setAttribute("user", user);
 				out.print("<script>location='" + request.getContextPath() + "/CommodityListServlet'</script>");
 			} catch (Exception e) {
-				out.print("<script>alert('用户名或密码错误！');location='" + request.getContextPath()
-				+ "/home/login.jsp'</script>");
+				out.print("<script>alert('" + e.getMessage() + "');location='" + request.getContextPath()
+						+ "/home/login.jsp'</script>");
 			}
 		} else if ("logout".equals(action)) {
 			session.invalidate();
@@ -58,7 +59,7 @@ public class UserLoginServlet extends HttpServlet {
 			}
 		} else if ("checkEmail".equals(action)) {
 			String email = request.getParameter("email");
-			//semail = new String(email.getBytes("iso-8859-1"), "UTF-8");
+			// semail = new String(email.getBytes("iso-8859-1"), "UTF-8");
 			boolean result = userService.checkEmail(email);
 			out.print(result);
 		}

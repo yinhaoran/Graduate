@@ -18,6 +18,15 @@ public class OrderDetail implements Serializable{
 	private String orderid;
 	private String comid;
 	private Integer comcount;
+	private Commodity commodity;
+	
+	public Commodity getCommodity() {
+		return commodity;
+	}
+
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
+	}
 
 	public OrderDetail() {
 		super();

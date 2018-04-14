@@ -15,6 +15,17 @@ public class AddressService {
 		return sad.findAllShipAddress(address);
 	}
 	
+	public ShipAddress getDefAddrByUserid(String userid) {
+		ShipAddressDao sad = new ShipAddressImpl();
+		ShipAddress address = new ShipAddress();
+		address.setUserid(userid);
+		//address.setSign("1");
+		List<ShipAddress> list =  sad.findAllShipAddress(address);
+		return list.get(0);
+	}
+	
+	
+	
 	public boolean updateSign(String addressid){
 		ShipAddressDao sad = new ShipAddressImpl();
 		List<ShipAddress> list = sad.findAllShipAddress(new ShipAddress());
@@ -68,6 +79,12 @@ public class AddressService {
 		add.setAddressid(addressid);
 		ShipAddressDao sad = new ShipAddressImpl();
 		List<ShipAddress> list = sad.findAllShipAddress(add);
+		return list.get(0);
+	}
+	
+	public ShipAddress findAddress(ShipAddress address){
+		ShipAddressDao sad = new ShipAddressImpl();
+		List<ShipAddress> list = sad.findAllShipAddress(address);
 		return list.get(0);
 	}
 }

@@ -60,11 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="user DefaultAddr">
 
 										<span class="buy-address-detail">   
-
-                   <span class="buy-user" id="name${status.index}">${address.receiverperson } </span>
+                   							<span class="buy-user" id="name${status.index}">${address.receiverperson } </span>
 										<span class="buy-phone" id="phone${status.index}">${address.shiptelephone }</span>
-
-
 										</span>
 									</div>
 									<div class="default-address DefaultAddr">
@@ -352,7 +349,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 	function changeAdd(index,id){
 		var url = "<%=request.getContextPath()%>/OrderPostServlet?action=changeAddress";
-		
 		var param ={
 			addressid:id
 		};
@@ -403,8 +399,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				if(data=="true"){
 					alert("删除成功！");
 					$("li#default"+i).remove();
-					
-					
 				}else{
 					alert("删除失败！");
 					
@@ -419,19 +413,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							alert("用户名不能为空");
 							return false;
 						}
-						
-					
-					
 						if($("#user-phone").val()==""){
 							alert("手机号码不能为空");
 							return false;
 						}
-						
 						if($("#city").val()==""){
 							alert("省市不能为空");
 							return false;
 						}
-					
 						if($("#user-intro").val()==""){
 							alert("详细地址不能为空");
 							return false;
@@ -441,7 +430,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.onload=function total(){
 			 var total = 0;
 			$(".J_ItemSum").each(function(){ 	
-					
 					total += parseInt($(this).text());					
 			 });
 			 $("#J_ActualFee").html(total);

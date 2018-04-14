@@ -13,6 +13,11 @@ import java.io.Serializable;
  * @since JDK 1.8
  */
 public class ShipAddress implements Serializable{
+	/**  
+	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).  
+	 * @since JDK 1.8  
+	 */
+	private static final long serialVersionUID = 1L;
 	private String addressid;// 收货地址主键
 	private String userid;// 用户主键
 	private String receiverperson;// 收货人
